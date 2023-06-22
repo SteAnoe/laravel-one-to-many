@@ -14,7 +14,7 @@ Portfolio | Project Show
     Cliente: {{$project->client}}
 </p>
 
-<img src="{{asset('storage/' . $project->img)}}" alt="">
+<img class="img-fluid" src="{{asset('storage/' . $project->img)}}" alt="">
 <p>
     Type: {{$project->type->name}}
 </p>

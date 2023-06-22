@@ -51,7 +51,7 @@ class ProjectController extends Controller
                 'name.required' => 'Il campo name deve essere compilato',
                 'name.unique' => 'Esiste già un project con quel nome',
                 'description.required' => 'Il campo Description deve essere compilato',
-                'type_id.exists' => 'Esiste'
+                'type_id.exists' => 'Non esiste'
             ]
         );
 
@@ -98,7 +98,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.project.edit', compact( 'project' ));
+        $types = Type::all();
+        return view('admin.project.edit', compact( 'project' , 'types' ));
     }
 
     /**
@@ -112,17 +113,25 @@ class ProjectController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|unique:projects,name,' . $project->id,
+                'name' => 'required',
                 'description' => 'required',
-                'img' => 'nullable|image'
+                'img' => 'nullable|image',
+                'type_id' => 'nullable|exists:types,id'
             ],
             [
                 'name.required' => 'Il campo name deve essere compilato',
                 'name.unique' => 'Esiste già un project con quel nome',
                 'description.required' => 'Il campo Description deve essere compilato',
+                'type_id.exists' => 'Non esiste'
             ]
         );
+
         $form_data = $request->all();
+
+        if($request->hasFile('img')){
+            $path = Storage::disk('public')->put('project_images', $request->img);
+            $form_data['img'] = $path;
+        }
 
         $slug = Project::generateSlug($request->name);
 

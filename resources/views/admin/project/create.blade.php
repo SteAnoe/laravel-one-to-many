@@ -29,16 +29,16 @@ Portfolio | Project Create
         <input type="text" name="client" id="client" class="form-control">
     </div>
     <div class="form-group mb-3">
-        <label for="img" class="form-label @error('client') is-invalid @enderror">Img</label>
+        <label for="img" class="form-label @error('img') is-invalid @enderror">Img</label>
 
         <input type="file" name="img" id="img" class="form-control">
     </div>
 
     <div class="form-group mb-3">
         <label for="project-types" class="form-label">Types</label>
-        <!-- @error('type_id')
+        @error('type_id')
         <div class="alert alert-danger">{{ $message }}</div>
-        @enderror -->
+        @enderror
         <select class="form-select form-select-lg @error('type_id') is-invalid @enderror" name="type_id" id="project-types">
             <option value="">-- Choose a type --</option>
             @foreach($types as $type)
