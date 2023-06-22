@@ -15,5 +15,8 @@ Portfolio | Project Show
 </p>
 
 <img src="{{asset('storage/' . $project->img)}}" alt="">
+<p>
+    Type: {{$project->type->name}}
+</p>
 
 @endsection

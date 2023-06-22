@@ -12,6 +12,7 @@
     @endif
     <a class="btn btn-primary" href="{{route ('admin.project.create') }}">Create Project</a>
     <div class="row justify-content-center">
+        
     <div class="table-responsive">
     <table>
         <thead>

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\Admin\Type;
 class ProjectController extends Controller
 {
     /**
@@ -28,7 +28,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view ('admin.project.create');
+        $types = Type::all();
+        return view ('admin.project.create', compact('types'));
     }
 
     /**
@@ -43,12 +44,14 @@ class ProjectController extends Controller
             [
                 'name' => 'required|unique:projects',
                 'description' => 'required',
-                'img' => 'nullable|image'
+                'img' => 'nullable|image',
+                'type_id' => 'nullable|exists:types,id'
             ],
             [
                 'name.required' => 'Il campo name deve essere compilato',
                 'name.unique' => 'Esiste già un project con quel nome',
                 'description.required' => 'Il campo Description deve essere compilato',
+                'type_id.exists' => 'Esiste'
             ]
         );
 

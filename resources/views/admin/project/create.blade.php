@@ -34,6 +34,19 @@ Portfolio | Project Create
         <input type="file" name="img" id="img" class="form-control">
     </div>
 
+    <div class="form-group mb-3">
+        <label for="project-types" class="form-label">Types</label>
+        <!-- @error('type_id')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror -->
+        <select class="form-select form-select-lg @error('type_id') is-invalid @enderror" name="type_id" id="project-types">
+            <option value="">-- Choose a type --</option>
+            @foreach($types as $type)
+                <option value="{{$type->id}}">{{$type->name}}</option>
+            @endforeach
+        </select>
+    </div>
+    
     <button class="btn btn-primary">Crea Project</button>
 </form>
 
